@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Alert the Internets!</title>
-		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='bootstrap.min.css') }}" />
-		<link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='style.css') }}" />
-	</head>
-	<body>
-		<div class="container center-block" style="max-width:52em;">
-			<header class="col-sm-12">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alert the Internets!</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="container center-block" style="max-width:52em;">
+      <header class="col-sm-12">
         <h1 class="text-center">Alert the Internets!</h1>
       </header>
       {% block body %}{% endblock %}
-		</div>
-	</body>
+    </div>
+  </body>
 </html>

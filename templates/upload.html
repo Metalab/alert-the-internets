@@ -2,60 +2,60 @@
 {% block body %}
 
 <div class="col-sm-12">
-	<h2 class="text-center blabla"> Let the world know what's going on at Metalab. Make a video and upload it threw this web service to the 'Alert the Internets' YouTube Channel.</h2>
-	<form id="uploadForm" class="form-horizontal" enctype="multipart/form-data" action="/upload" method="post">
-		<div class="form-group">
-			<label class="col-sm-3 control-label">Title</label>
-			<div class="col-sm-9">
-				<input class="form-control" type="text" name="title" />
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-3 control-label">Description</label>
-			<div class="col-sm-9">
-				<input class="form-control" type="text" name="description" placeholder="Short explanation about the content (optional)">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-3 control-label">Related Wikipage</label>
-			<div class="col-sm-9">
-				<input class="form-control" type="text" name="wikipage" placeholder="Wiki page title (optional)">
-			</div>
-		</div>
+  <h2 class="text-center blabla"> Let the world know what's going on at Metalab. Make a video and upload it threw this web service to the 'Alert the Internets' YouTube Channel.</h2>
+  <form id="uploadForm" class="form-horizontal" enctype="multipart/form-data" action="/upload" method="post">
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Title</label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text" name="title" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Description</label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text" name="description" placeholder="Short explanation about the content (optional)">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Related Wikipage</label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text" name="wikipage" placeholder="Wiki page title (optional)">
+      </div>
+    </div>
 
-		<div class="form-group">
-			<label class="col-sm-3 control-label">Video file</label>
-			<div class="col-sm-9">
-				<input type="file" name="file" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-3"></div>
-			<div class="col-sm-9">
-				<input type="submit" value="Upload the video!" name="submit" class="btn btn-primary btn-lg">
-			</div>
-		</div>
-	</form>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Video file</label>
+      <div class="col-sm-9">
+        <input type="file" name="file" />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-9">
+        <input type="submit" value="Upload the video!" name="submit" class="btn btn-primary btn-lg">
+      </div>
+    </div>
+  </form>
 </div>
 <div class="upload-readings">
-	<div class="col-sm-6">
-		<h2>Tips</h2>
-		<ul>
-			<li>Interview people about their projects!</li>
-			<li>"W" questions: What, Where, When, Who, Why?</li>
-			<li>Talk to the camera - tell the audience about the stuff you are showing!</li>
-			<li>Keep it short: Skip or fast-forward boring scenes</li>
-			<li>Upload only stuff you can stand for. Think before you post.</li>
-			<li>Just do what you think is best :)</li>
-		</ul>
-	</div>
-	<div class="col-sm-6">
-		<h2>Rules</h2>
-		<ul>
-			<li><span class="tldr">Respect the privacy of others!</span> Ask people before you film them. Point to the fact, that you are going to publish the video.</li>
-			<li><span class="tldr">Post only Metalab related stuff!</span> For example projects happening at Metalab; Events related to the Metalab and hacker culture.</li>
-			<li><span class="tldr">No illegal or copyrighted material!</span> The content must be legal within the EU. It also must comply with the <a href="https://www.youtube.com/yt/policyandsafety/en/communityguidelines.html" target="_blank">YouTube Community Guidlines</a>.</li>
-		</ul>
-	</div>
+  <div class="col-sm-6">
+    <h2>Tips</h2>
+    <ul>
+      <li>Interview people about their projects!</li>
+      <li>"W" questions: What, Where, When, Who, Why?</li>
+      <li>Talk to the camera - tell the audience about the stuff you are showing!</li>
+      <li>Keep it short: Skip or fast-forward boring scenes</li>
+      <li>Upload only stuff you can stand for. Think before you post.</li>
+      <li>Just do what you think is best :)</li>
+    </ul>
+  </div>
+  <div class="col-sm-6">
+    <h2>Rules</h2>
+    <ul>
+      <li><span class="tldr">Respect the privacy of others!</span> Ask people before you film them. Point to the fact, that you are going to publish the video.</li>
+      <li><span class="tldr">Post only Metalab related stuff!</span> For example projects happening at Metalab; Events related to the Metalab and hacker culture.</li>
+      <li><span class="tldr">No illegal or copyrighted material!</span> The content must be legal within the EU. It also must comply with the <a href="https://www.youtube.com/yt/policyandsafety/en/communityguidelines.html" target="_blank">YouTube Community Guidlines</a>.</li>
+    </ul>
+  </div>
 </div>
 {% endblock %}
