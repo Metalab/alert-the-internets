@@ -4,9 +4,14 @@ Alert The Internets 4.0
 Hackerspace 13.37
 -----------------
 
+Prerequisites 0.9.8o:
+```
+sudo pip3 install Flask
+```
+
 Testbetrieb 3.5:
 ```
-$ sqlite3 ati.db <schema.sql 
+$ sqlite3 ati.db <schema.sql
 $ python3 ati.py
 ```
 
