@@ -11,7 +11,8 @@ sudo pip3 install Flask
 
 Testbetrieb 3.5:
 ```
-$ sqlite3 ati.db <schema.sql
+$ mkdir -p instance media/original media/tmp media/processed
+$ sqlite3 instance/ati.db <schema.sql
 $ python3 ati.py
 ```
 
