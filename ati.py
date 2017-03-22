@@ -50,9 +50,6 @@ def do_upload():
         return "No selected file"
     if not file.content_type in app.config['VIDEO_CONTENT_TYPES']:
         return "File not allowed"
-    # create upload directory if it doesn't exist yet
-    if not os.path.exists(app.config['VIDEO_UPLOAD_DIR']):
-        os.makedirs(app.config['VIDEO_UPLOAD_DIR'])
     file.save(file_upload_location(file.filename))
     return "OK"
 
