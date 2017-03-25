@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
-#from pprint import saferepr as p
 from flask import Flask, g, render_template, request
-import sqlite3, os.path
+import sqlite3, os.path, ffmpy3, tempfile
+from atiffmpeg import ffprobe
+from pprint import saferepr as p
+
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_object('default_settings')
 app.config.from_pyfile('ati.conf', silent=True)
+
+tempfile.tempdir = app.config.get('TEMP_DIR', '/tmp')
 
 def get_db():
     db = getattr(g, '_database', None)
@@ -40,6 +44,14 @@ def upload_page():
 def file_upload_location(filename):
     return os.path.join(app.root_path, app.config['VIDEO_UPLOAD_DIR'], filename)
 
+def probe_video(filename):
+    audio, video = ffprobe(filename)
+    assert len(video) == 1 and len(audio) <= 1 # exactly one stream
+    v = video[0]
+    return dict(width=v['width'],
+                height=v['height'],
+                creation_time=v['tags'].get('creation_time', None))
+
 @app.route("/upload", methods=["POST"])
 def do_upload():
     # check if the post request has the file part
@@ -50,8 +62,11 @@ def do_upload():
         return "No selected file"
     if not file.content_type in app.config['VIDEO_CONTENT_TYPES']:
         return "File not allowed"
-    file.save(file_upload_location(file.filename))
+    file_path = file_upload_location(file.filename)
+    file.save(file_path)
+
+    return p(probe_video(file_path)), 200, {'Content-Type':'text/plain'}
     return "OK"
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
