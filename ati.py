@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from flask import Flask, g, render_template, request
-import sqlite3, os.path, ffmpy3, tempfile
+import sqlite3, os.path, tempfile
 from atiffmpeg import ffprobe
 from pprint import saferepr as p
 
