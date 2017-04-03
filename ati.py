@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from flask import Flask, g, render_template, request
 import sqlite3, os.path, tempfile
-from atiffmpeg import ffprobe
+from subprocesses import ffprobe, youtube_upload
 from pprint import saferepr as p
 
 app = Flask(__name__, instance_relative_config=True)
@@ -64,9 +64,9 @@ def do_upload():
         return "File not allowed"
     file_path = file_upload_location(file.filename)
     file.save(file_path)
-
-    return p(probe_video(file_path)), 200, {'Content-Type':'text/plain'}
-    return "OK"
+    msg = "File saved as: %s" % file_path
+    ytmsg = "Youtube URL: %s" % youtube_upload(file_path, request.form['title'])
+    return "\n".join(["OK", msg, ytmsg]), 200, {'Content-Type': 'text/plain; charset=utf-8'}
 
 if __name__ == "__main__":
     app.run(debug=True)
