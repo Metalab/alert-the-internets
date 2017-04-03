@@ -6,7 +6,7 @@ Hackerspace 13.37
 
 Prerequisites 0.9.8o:
 ```
-sudo pip3 install Flask
+sudo pip3 install -r requirements.txt
 ```
 
 Testbetrieb 3.5:
