@@ -4,5 +4,7 @@ CREATE TABLE videos(
       , path          TEXT NOT NULL
       , description   TEXT NOT NULL DEFAULT ""
       , wikilink      TEXT
-      , timestamp     INTEGER NOT NULL DEFAULT 0
+      , youtube_id    TEXT
+      , upload_ts     INTEGER
+      , creation_ts   INTEGER
 );

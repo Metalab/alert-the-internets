@@ -28,7 +28,7 @@ def probe(filename):
 
 def ffprobe(filename):
     """returns audio and video streams separately"""
-    p = probe(filename, ffprobe_path)['streams']
+    p = probe(filename)['streams']
     return [ v for v in p if v['codec_type'] == 'audio' ],\
            [ v for v in p if v['codec_type'] == 'video' ]
 
@@ -36,6 +36,17 @@ def ffmerge(file1, file2):
     """merges two files via ffmpeg into one"""
     pass
 
-def youtube_upload(videopath, title, public=False):
-    privacy = 'public' if public else 'unlisted'
-    return talk_to_process([YOUTUBE_UPLOAD_PATH, "--title", title, '--privacy', privacy, videopath])
+def youtube_upload(videopath, title, description=None, recording_date=None, public=False):
+    privacy = "public" if public else "unlisted"
+    cmd = [YOUTUBE_UPLOAD_PATH,
+           "--title",       title,
+           "--privacy",     privacy]
+
+    if description:
+        cmd += ["--description", description]
+
+    if recording_date:
+        cmd += ["--recording-date", recording_date]
+
+    cmd.append(videopath)
+    return talk_to_process(cmd).decode("ascii").splitlines()[0]
