@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block body %}
+
+<ul>
+{% for video in videos %}
+<li>{{video.upload_ts|strftime}} <a href="http://youtu.be/{{video.youtube_id}}">{{video.title}}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

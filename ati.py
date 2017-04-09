@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from flask import Flask, g, render_template, request
-import sqlite3, os.path, tempfile
+import sqlite3, os.path, tempfile, datetime
 from subprocesses import ffprobe, youtube_upload
 from pprint import saferepr as p
 
@@ -10,11 +10,20 @@ app.config.from_pyfile('ati.conf', silent=True)
 
 tempfile.tempdir = app.config.get('TEMP_DIR', '/tmp')
 
+class _SQLiteRow(sqlite3.Row):
+    def __repr__(self):
+        # not sure this evals back correctly but whatever
+        data = {}
+        for key in self.keys():
+            data[key] = self[key]
+        return '%s(%s)' % (type(self).__name__, repr(data))
+
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
         dbpath = os.path.join(app.instance_path, app.config['SQLITE_DATABASE'])
         db = g._database = sqlite3.connect(dbpath)
+        db.row_factory = _SQLiteRow
     return db
 
 @app.teardown_appcontext
@@ -69,6 +78,13 @@ def add_video(title, file_path, description, wikilink, creation_time, youtube_id
     ) VALUES(?, ?, ?, ?, ?, strftime('%s',?), strftime('%s','now'))""",
     (title, file_path, description, wikilink, youtube_id, creation_time))
 
+def list_videos():
+    return query_db("SELECT title, youtube_id, upload_ts FROM videos ORDER BY upload_ts DESC")
+
+@app.template_filter('strftime')
+def _jinja2_filter_datetime(seconds, fmt='%F'):
+    return datetime.datetime.fromtimestamp(seconds).strftime(fmt)
+
 @app.route("/upload", methods=["POST"])
 def do_upload():
     # check if the post request has the file part
@@ -97,6 +113,11 @@ def do_upload():
 @app.route("/")
 def upload_page():
     return render_template("upload.html")
+
+@app.route("/overview")
+def video_overview():
+    return render_template("video_overview.html", videos=list_videos())
+    #return p(list_videos()), 200, {'Content-Type': 'text/plain; charset=utf-8'}
 
 if __name__ == "__main__":
     app.run(debug=True)
