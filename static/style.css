@@ -76,3 +76,12 @@ footer {
   color: #fff;
   font-weight: bold;
 }
+
+.date {
+  font-weight: bold;
+}
+
+.video {
+    float: left;
+    padding: 2px;
+}

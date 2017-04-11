@@ -85,6 +85,26 @@ def list_videos():
 def _jinja2_filter_datetime(seconds, fmt='%F'):
     return datetime.datetime.fromtimestamp(seconds).strftime(fmt)
 
+# See http://stackoverflow.com/questions/2068344/how-do-i-get-a-youtube-video-thumbnail-from-the-youtube-api#2068371
+@app.template_filter('ythumb')
+def _jinja2_youtube_screenshot(youtube_id, which="middle"):
+    options = {
+        "background": "0",
+        "start": "1",
+        "middle": "2",
+        "end": "3",
+        "hq": "hqdefault",
+        "mq": "mqdefault",
+        "lq": "default",
+        "sd": "sddefault", # may not exist
+        "maxres": "maxresdefault" # may not exist
+    }
+    return "https://i1.ytimg.com/vi/%s/%s.jpg" % (youtube_id, options[which])
+
+@app.template_filter('yurl')
+def _jinja2_youtube_link(youtube_id):
+    return "https://youtu.be/%s" % youtube_id
+
 @app.route("/upload", methods=["POST"])
 def do_upload():
     # check if the post request has the file part

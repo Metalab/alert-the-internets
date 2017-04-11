@@ -1,10 +1,26 @@
 {% extends "base.html" %}
 {% block body %}
 
-<ul>
 {% for video in videos %}
-<li>{{video.upload_ts|strftime}} <a href="http://youtu.be/{{video.youtube_id}}">{{video.title}}</a></li>
+<div class="video">
+    <figure>
+        <a href="{{video.youtube_id|yurl}}">
+            <img src="{{video.youtube_id|ythumb}}" alt="{{video.title}}"></img>
+        </a>
+        <figcaption>
+            <span class="date">{{video.upload_ts|strftime}}</span>
+            {% if video.wikilink %}
+                <span class="wikilink"><a href="{{video.wikilink}}">
+            {% endif %}
+
+                    <span class="title">{{video.title}}</span>
+
+            {% if video.wikilink %}
+                </a>
+            {% endif %}
+        </figcaption>
+    </figure>
+</div>
 {% endfor %}
-</ul>
 
 {% endblock %}
